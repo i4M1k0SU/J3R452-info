@@ -5,7 +5,7 @@ J3R452 white cards, initialize, unfused, T=1, defaulted ATR, SCP03.
 Java Card 3.0.5 Classic.
 
 ISO/IEC 14443 Type A, ISO/IEC 7816に対応。
-(Type Bに対応しているという話もあるが不明)
+(Type Bに対応しているという話もあるが、実機では REQB に応答しなかった。[card-info.md](card-info.md#非接触インタフェース-iso-14443) 参照)
 
 ## 規格
 

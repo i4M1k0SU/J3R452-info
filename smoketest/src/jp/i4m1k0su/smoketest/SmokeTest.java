@@ -17,7 +17,7 @@ import javacard.security.CryptoException;
  * 開発環境と JCOP Extended API (Ed25519 / X25519 / X448) の実機動作確認用アプレット。
  *
  * CLA=80
- *   INS 00          INFO          -> JC版(2) | 機能ビット(1) | 空き NVM(4) | 空き RAM RESET(4) | 空き RAM DESELECT(4)
+ *   INS 00          INFO          -> JC版(2) | 機能ビット(1) | 空き NVM(4) | 空き RAM RESET(4) | 空き RAM DESELECT(4) | APDU.getProtocol()(1)
  *   INS 10          Ed25519 鍵生成 -> 公開鍵
  *   INS 11          Ed25519 署名   data=メッセージ -> 署名(64)
  *   INS 20 P1=curve DH 鍵生成      -> 公開鍵                 (curve: 00=X25519, 01=X448)
@@ -138,6 +138,7 @@ public class SmokeTest extends Applet {
         off = putAvailableMemory(buf, off, JCSystem.MEMORY_TYPE_PERSISTENT);
         off = putAvailableMemory(buf, off, JCSystem.MEMORY_TYPE_TRANSIENT_RESET);
         off = putAvailableMemory(buf, off, JCSystem.MEMORY_TYPE_TRANSIENT_DESELECT);
+        buf[off++] = APDU.getProtocol(); // 上位 4bit=媒体 (00:接触 80:非接触 Type A 90:Type B)、下位 4bit=T=0/1
         apdu.setOutgoingAndSend((short) 0, off);
     }
 

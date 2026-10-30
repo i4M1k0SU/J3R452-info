@@ -102,6 +102,9 @@ def main():
     print(f"JCSystem.getVersion(): {info[:2].hex().upper()}")
     print(f"空き NVM: {mem[0]} B / RAM(RESET): {mem[1]} B / RAM(DESELECT): {mem[2]} B")
     print(f"機能: Ed25519={bool(caps & CAP_ED25519)} X25519={bool(caps & CAP_X25519)} X448={bool(caps & CAP_X448)}")
+    proto = info[15]
+    media = {0x00: "接触 (DEFAULT)", 0x80: "非接触 Type A", 0x90: "非接触 Type B", 0xA0: "USB"}.get(proto & 0xF0, "不明")
+    print(f"APDU.getProtocol(): {proto:02X} ({media}, T={proto & 0x0F})")
 
     failed = []
     checks = [

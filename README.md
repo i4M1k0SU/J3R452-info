@@ -16,7 +16,7 @@ IC カード **J3R452** (JCOP 4.5 / Java Card 3.0.5 Classic、NXP P71D600) の�
 ### ドキュメント
 
 - [docs/specs.md](docs/specs.md) — カードの公称仕様
-- [docs/card-info.md](docs/card-info.md) — 実機で測定した情報 (ATR・CPLC・メモリ・対応アルゴリズム・特権など)
+- [docs/card-info.md](docs/card-info.md) — 実機で測定した情報 (ATR・CPLC・メモリ・対応アルゴリズム・特権・非接触インタフェースなど)
 - [docs/dev-environment.md](docs/dev-environment.md) — 開発環境の構成・セットアップ・使い方
 
 ## extended/ について
