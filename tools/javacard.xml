@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  smoketest/build.xml から読み込む共通定義
+    <import file="../tools/javacard.xml"/>
+  JC SDK 3.2 (v26.0) のコンバータで Java Card 3.0.5 向け CAP を生成し、JCOP Extended API をリンクする
+-->
+<project name="j3r452-common">
+    <dirname property="j3r452.tools" file="${ant.file.j3r452-common}"/>
+    <property name="j3r452.root" location="${j3r452.tools}/.."/>
+    <property name="jckit" location="${j3r452.tools}/sdks/jc320v26.0_kit"/>
+    <property name="targetsdk" value="3.0.5"/>
+    <property name="jcopx.jar" location="${j3r452.root}/extended/JCOPx_API-R1.3.4.jar"/>
+    <property name="gp.jar" location="${j3r452.tools}/gp.jar"/>
+    <property name="python" location="${j3r452.root}/.venv/Scripts/python.exe"/>
+
+    <taskdef name="javacard" classname="pro.javacard.ant.JavaCard" classpath="${j3r452.tools}/ant-javacard.jar"/>
+
+    <!-- GlobalPlatformPro 呼び出し。引数は <arg> で渡す (例: smoketest/build.xml の install)
+         失敗を無視したい事前削除などは failonerror="false" を指定する。 -->
+    <macrodef name="gp">
+        <attribute name="failonerror" default="true"/>
+        <element name="gp-args" implicit="true"/>
+        <sequential>
+            <java jar="${gp.jar}" fork="true" failonerror="@{failonerror}">
+                <gp-args/>
+            </java>
+        </sequential>
+    </macrodef>
+</project>

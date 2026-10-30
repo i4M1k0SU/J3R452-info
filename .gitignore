@@ -1,0 +1,13 @@
+# tools/setup.ps1 で取得するもの
+/tools/apache-ant-*/
+/tools/sdks/
+/tools/ant-javacard.jar
+/tools/gp.jar
+/.venv/
+
+# NXP 資料 (JCOP Extended API)。各自で extended/ に配置する
+/extended/
+
+# ビルド成果物
+/smoketest/build/
+__pycache__/

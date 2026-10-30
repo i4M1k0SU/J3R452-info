@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="smoketest" default="build">
+    <import file="../tools/javacard.xml"/>
+
+    <property name="package.aid" value="F04A335234353201"/>
+    <property name="applet.aid" value="F04A33523435320101"/>
+    <property name="cap" location="build/smoketest.cap"/>
+
+    <target name="build" description="CAP をビルド">
+        <mkdir dir="build"/>
+        <javacard jckit="${jckit}">
+            <cap targetsdk="${targetsdk}" package="jp.i4m1k0su.smoketest" aid="${package.aid}" version="1.0"
+                 sources="src" output="${cap}">
+                <applet class="jp.i4m1k0su.smoketest.SmokeTest" aid="${applet.aid}"/>
+                <import jar="${jcopx.jar}"/>
+            </cap>
+        </javacard>
+    </target>
+
+    <target name="install" depends="build" description="カードにインストール (既存は置き換え)">
+        <gp><arg value="--force"/><arg value="--install"/><arg file="${cap}"/></gp>
+    </target>
+
+    <target name="uninstall" description="カードから削除">
+        <gp><arg value="--uninstall"/><arg file="${cap}"/></gp>
+    </target>
+
+    <target name="test" description="実機でスモークテストを実行">
+        <exec executable="${python}" failonerror="true">
+            <arg file="host/test_smoketest.py"/>
+        </exec>
+    </target>
+
+    <target name="clean">
+        <delete dir="build"/>
+    </target>
+</project>
